@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission to Mars</title>
+    <link rel = "stylesheet"
+           href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <style>
+         body {
+                background-image: url('https://mars.nasa.gov/system/resources/detail_files/25851_1-PIA24624-web.jpg');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+              }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!--Add Jumbotron to header-->
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <!--Add a button to activate scraping script-->
+            <p>
+                <a class="btn btn-link btn-lg" href="/scrape" role="button">Scrape New Data</a>
+            </p>
+            <!--Add a section for Mars News-->
+            <div class = "row" id ="mars-news">
+                <div class ="col-md-12 col-xs-12 col-sm-12">
+                    <div class = "media">
+                        <div class ="media-body">
+                            <h1 style="font-size:2.5vw;">Latest Mars News:</h1>
+                            <h4 class="media-heading" style="font-size:1.5vw;"><strong>{{mars.news_title}}</strong></h4>
+                            <p style="font-size:1.5vw;">{{mars.news_paragraph}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Add a section for Featured Image and Facts table-->
+           <div class= "row" id = "mars-featured-image">
+               <div class = "col-md-8 col-xs-12 col-sm-12">
+                   <h3 style ="font-size:2.0vw;">Featured Mars Image</h3>
+                   <img src ="{{mars.featured_image}}" class = "img-responsive" alt = "Responsive image">
+               </div>
+               <div class = "col-md-4 col-xs-12 col-sm-12">
+                   <!--Mars Facts-->
+                   <div class ="row" id="mars-facts">
+                       <h3 style= "font-size:2.5vw;"> Mars Facts</h3>
+                       <div class="table-responsive">   {{mars.facts| safe}} </div>
+                   </div>
+               </div>
+           </div>
+           <div class = "row"  id = "mars-hemispheres">
+               <div class = "col-md-12">
+                   <h2 style = "font-size:2.5vw;"> Mars Hemispheres</h2>
+
+               </div>
+           </div>
+           <div class= "row" id = "mars=hemisphere-images">
+             {% for dict_item in mars.hemispheres %}
+
+
+                  <div class = "col-md-6 col-xs-3 col-sm-3">
+
+                    <image src="{{dict_item['image_url']}}" class = "img-thumbnail" alt = "Responsive image">
+                    <h4 style = "font-size:2vw;">{{dict_item['title']}}</h4>
+                  </div>
+             {% endfor %}
+           </div>
+        </div>
+    </div>
+
+</body>
+</html>
